@@ -125,8 +125,8 @@ def main():
 
         lr = adjust_learning_rate(optimizer, epoch)
 
-        (train_loss, train_acc) = train(trainloader, net, criterion, optimizer, epoch, use_cuda)
-        (test_loss, test_acc) = test(testloader, net, criterion, epoch, use_cuda)
+        train_loss, train_acc = train(trainloader, net, criterion, optimizer, epoch, use_cuda)
+        test_loss, test_acc = test(testloader, net, criterion, epoch, use_cuda)
 
         print(' Train Loss: %.8f, Train Acc: %.2f' % (train_loss, train_acc*100))
         print(' Test Loss:  %.8f, Test Acc:  %.2f' % (test_loss, test_acc*100))
@@ -172,7 +172,7 @@ def train(trainloader, net, criterion, optimizer, epoch, use_cuda):
 
         progress_bar(batch_idx, len(trainloader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
             % (train_loss/(batch_idx+1), 100.*correct/total, correct, total))
-    return (train_loss/total, correct/total)
+    return (train_loss/total, correct*1.0/total)
 
 def test(testloader, net, criterion, epoch, use_cuda):
     global best_acc
@@ -194,7 +194,7 @@ def test(testloader, net, criterion, epoch, use_cuda):
 
         progress_bar(batch_idx, len(testloader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
             % (test_loss/(batch_idx+1), 100.*correct/total, correct, total))
-    return (test_loss/total, correct/total)
+    return (test_loss/total, correct*1.0/total)
 
 def save_checkpoint(state, is_best, checkpoint='checkpoint', filename='checkpoint_cifar10.pth.tar'):
     filepath = os.path.join(checkpoint, filename)
