@@ -3,6 +3,7 @@
     - msr_init: net parameter initialization.
     - progress_bar: progress bar mimic xlua.progress.
 '''
+import errno
 import os
 import sys
 import time
@@ -131,3 +132,13 @@ def format_time(seconds):
     if f == '':
         f = '0ms'
     return f
+
+def mkdir_p(path):
+'''make dir if not exist'''
+    try:
+        os.makedirs(path)
+    except OSError as exc:  # Python >2.5
+        if exc.errno == errno.EEXIST and os.path.isdir(path):
+            pass
+        else:
+            raise

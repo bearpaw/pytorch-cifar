@@ -17,7 +17,7 @@ import shutil
 import random
 from models import *
 from utils.logger import Logger
-from utils.misc import progress_bar
+from utils.misc import *
 from torch.autograd import Variable
 
 
@@ -52,7 +52,7 @@ def main():
     start_epoch = args.start_epoch  # start from epoch 0 or last checkpoint epoch
 
     if not os.path.isdir(args.checkpoint):
-        os.makedirs(args.checkpoint, exist_ok=True)
+        mkdir_p(args.checkpoint)
 
     # Random seed
     if args.manualSeed is None:
