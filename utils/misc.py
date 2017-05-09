@@ -134,7 +134,7 @@ def format_time(seconds):
     return f
 
 def mkdir_p(path):
-'''make dir if not exist'''
+    '''make dir if not exist'''
     try:
         os.makedirs(path)
     except OSError as exc:  # Python >2.5
