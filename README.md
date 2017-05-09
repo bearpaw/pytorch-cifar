@@ -15,13 +15,15 @@ Cons:
 ## Accuracy
 | Model            | Acc.        |
 | ------------     | ----------- |
-| VGG16            | 92.64%      |
-| ResNet18         | 93.02%      |
-| ResNet50         | 93.62%      |
-| ResNet101        | 93.75%      |
-| ResNeXt29(32x4d) | 94.73%      |
-| ResNeXt29(2x64d) | 94.82%      |
-| DenseNet121      | 95.04%      |
+| VGG16            |       |
+| VGG19            | 91.36%      |
+| ResNet18         | 94.37%      |
+| ResNet34         | 94.77%      |
+| ResNet50         | 94.24%      |
+| ResNet101        |       |
+| ResNeXt29(32x4d) |       |
+| ResNeXt29(2x64d) |       |
+| DenseNet121      |       |
 
 ## Learning rate adjustment
 I manually change the `lr` during training:
@@ -29,4 +31,6 @@ I manually change the `lr` during training:
 - `0.01` for epoch `[150,250)`
 - `0.001` for epoch `[250,350)`
 
-Resume the training with `python main.py --resume --lr=0.01`
+Resume the training with `python main.py --resume  saved_model_path`
+
+

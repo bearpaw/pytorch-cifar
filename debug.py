@@ -16,6 +16,7 @@ import shutil
 
 import random
 from models import *
+from utils.visualize import *
 from utils.logger import Logger
 from utils.misc import progress_bar
 from torch.autograd import Variable
@@ -186,6 +187,22 @@ def test(testloader, net, criterion, epoch, use_cuda):
         inputs, targets = Variable(inputs, volatile=True), Variable(targets)
         outputs = net(inputs)
         loss = criterion(outputs, targets)
+
+        # get attention
+        att_mask = net._modules['module'].get_mask()
+
+        for i in range(0, 3):
+            att = att_mask[i].data#.expand_as(inputs.data).cpu()
+            print('Att %d' % i)
+            print('Max %f' % att.max())
+            print('Min %f' % att.min())
+
+        # show_batch(inputs.data.cpu(), Mean=(0.4914, 0.4822, 0.4465), Std=(0.2023, 0.1994, 0.2010))
+        show_mask(inputs.data.cpu(), att.cpu(), Mean=(0.4914, 0.4822, 0.4465), Std=(0.2023, 0.1994, 0.2010))
+
+        # inputs.float().reshape()
+
+        # # att = att_mask[1]
 
         test_loss += loss.data[0]
         _, predicted = torch.max(outputs.data, 1)
