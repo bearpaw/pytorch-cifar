@@ -125,8 +125,8 @@ def main():
 
         lr = adjust_learning_rate(optimizer, epoch)
 
-        train_loss, train_acc = train(trainloader, net, criterion, optimizer, epoch, use_cuda)
-        test_loss, test_acc = test(testloader, net, criterion, epoch, use_cuda)
+        (train_loss, train_acc) = train(trainloader, net, criterion, optimizer, epoch, use_cuda)
+        (test_loss, test_acc) = test(testloader, net, criterion, epoch, use_cuda)
 
         print(' Train Loss: %.8f, Train Acc: %.2f' % (train_loss, train_acc*100))
         print(' Test Loss:  %.8f, Test Acc:  %.2f' % (test_loss, test_acc*100))
